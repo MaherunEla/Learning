@@ -4,28 +4,28 @@ import { COLUMNS } from './columns'
 import MOCK_DATA from './MOCK_DATA.json'
 
 const BasicTable = () => {
-  const colums = useMemo(()=> COLUMNS,[])
+  const columns = useMemo(()=> COLUMNS,[])
   const data = useMemo(()=> MOCK_DATA,[])
- const tableInstance = useTable({
-    colums,
-    data
-  })
-
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow
-  } = tableInstance
+  }= useTable({
+    columns,
+    data
+  })
+
+
   return (
     <table {...getTableProps()}>
       <thead> {
         headerGroups.map((headerGroup)=>(
           <tr {...headerGroup.getHeaderGroupProps()}>
             {
-              headerGroup.headers.map((colum) => (
-                <th {...column.getHeaderGroupProps}
+              headerGroup.headers.map((column) => (
+                <th {...column.getHeaderGroupProps()}>{column.render('Header')}</th>
 
               ))
 
@@ -38,6 +38,19 @@ const BasicTable = () => {
 
       </thead>
       <tbody {...getTableBodyProps()}>
+        {
+          rows.map(row =>{
+            prepareRow(row)
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell)=>{
+                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                })}
+              </tr>
+
+            )
+          })
+        }
       <tr>
         <td></td>
       </tr>
