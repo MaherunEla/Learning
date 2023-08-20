@@ -1,10 +1,11 @@
-import BasicTable from '@/components/BasicTable'
 import Image from 'next/image'
+import { YouTubeForm } from './components/YouTubeForm'
 
 export default function Home() {
   return (
     <main >
-    <BasicTable/>
+      <YouTubeForm/>
+      
     </main>
   )
 }

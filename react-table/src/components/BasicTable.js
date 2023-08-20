@@ -19,10 +19,10 @@ const BasicTable = () => {
 
 
   return (
-    <table {...getTableProps()}>
+    <table  className='border-collapse border border-slate-400' {...getTableProps()}>
       <thead> {
         headerGroups.map((headerGroup)=>(
-          <tr {...headerGroup.getHeaderGroupProps()}>
+          <tr {...headerGroup.getHeaderGroupProps()} >
             {
               headerGroup.headers.map((column) => (
                 <th {...column.getHeaderGroupProps()}>{column.render('Header')}</th>
@@ -56,6 +56,24 @@ const BasicTable = () => {
       </tr>
 
       </tbody>
+      <tfoot>
+        {
+          footerGroups.map(footerGroup=>(
+            <tr {...footerGroup.getFooterGroupProps()}>
+              {
+                footerGroup.headers.map(column=> (
+                  <td {...column.getFooterGroupProps}>
+                    {
+                      column.render('Footer')
+                    }
+                  </td>
+                ))
+              }
+
+            </tr>
+          ))
+        }
+      </tfoot>
     </table>
   )
 }
