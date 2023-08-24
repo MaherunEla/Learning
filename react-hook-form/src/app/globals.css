@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer{
+    .error{
+        @apply text-red-500 text-sm text-left ;
+    }
+    .form-control{
+        @apply mb-5;
+    }
+
+}
